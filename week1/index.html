@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--html5 의 구조 .. html 을 명시하는 코드 -->
+<html lang="ko">
+  <!--DOCTYPE 바로 밑에는 html 태그가 와야 한다. lang 는 언어 설정. 접근성 부분에서 차이 -->
+  <head>
+    <!--페이지의 메타 데이터를 포함하는 태그. 데이터를 설명하는 데이터이다. -->
+    <!--데이터들을 나타내는 데이터 = 메타 데이터!! -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="file.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+  </head>
+  <body>
+    <header></header>
+    <nav class="flex center">
+      <button>오늘만 보기</button>
+      <button>내일만 보기</button>
+      <button>함께 보기</button>
+    </nav>
+    <main class="flex">
+      <section class="left">
+        <h5>오늘 할 일</h5>
+        <div class="form flex">
+          <input />
+          <button>+</button>
+        </div>
+      </section>
+      <section class="right">
+        <h5>내일 할 일</h5>
+        <ul>
+          <li class="grid">
+            예시 1 <span class="material-symbols-outlined">delete</span>
+          </li>
+          <hr width="95%" align="left" />
+          <li class="grid last">
+            예시 2 <span class="material-symbols-outlined">delete</span>
+          </li>
+        </ul>
+        <div class="form flex">
+          <input />
+          <button>+</button>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>
