@@ -1,6 +1,7 @@
 html {
   max-width: 1024px;
   min-width: none;
+  background-color: rgb(250, 249, 249);
 }
 
 * {
@@ -69,6 +70,7 @@ article {
   align-content: space-between; 
   margin-top: 20px;
   height: 336px;
+  background-color: white;
 }
 
 article:hover {
