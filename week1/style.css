@@ -66,14 +66,15 @@ section {
 
 article {
   width: 230px;
-  justify-content: space-between; 
+  align-content: space-between; 
   margin-top: 20px;
-
+  height: 336px;
 }
 
 article:hover {
   animation: pulse; 
   animation-duration: 1s;
+  box-shadow: 5px;
 }
 
 article h4 {
@@ -98,28 +99,38 @@ article p {
   margin: 20px 0px 10px 10px;
 }
 
+.article_default {
+  justify-content: space-between;
+  width: 100%;
+}
 
+.article_variable {
+  width: 100%;
+}
 
 @media screen and (max-width: 1015px) {
  
   article {
     width: 280px;
+    height: 370px;
   }
 
 }
 
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 845px) {
  
   article {
-    width: 300px;
+    width: 330px;
+    height: 400px;
   }
 
 }
 
-@media screen and (max-width: 615px) {
+@media screen and (max-width: 670px) {
  
   article {
     width: 400px;
+    height: 450px;
   }
 
 }
