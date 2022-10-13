@@ -78,18 +78,18 @@
   
   /*form*/
   
-  .form {
+  form {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translate(-50%, 0);
   }
   
-  .form input {
+  form input {
     min-width: 200px;
   }
   
-  .form button {
+  form button {
     border-radius: 3px;
     border: 1px solid black;
   }

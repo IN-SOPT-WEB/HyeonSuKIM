@@ -26,26 +26,37 @@
     <main class="flex">
       <section class="left">
         <h5>오늘 할 일</h5>
-        <div class="form flex">
-          <input />
-          <button>+</button>
-        </div>
+        <ul class="leftList">
+          <li class="grid">
+            예시 1
+            <span class="material-symbols-outlined">delete</span>
+          </li>
+          <li class="grid last">
+            예시 2
+            <span class="material-symbols-outlined">delete</span>
+          </li>
+        </ul>
+        <form class="flex">
+          <input class="leftInput" />
+          <button class="leftButton">+</button>
+        </form>
       </section>
       <section class="right">
         <h5>내일 할 일</h5>
-        <ul>
+        <ul class="rightList">
           <li class="grid">
-            예시 1 <span class="material-symbols-outlined">delete</span>
+            예시 1
+            <span class="material-symbols-outlined">delete</span>
           </li>
-          <hr width="95%" align="left" />
           <li class="grid last">
-            예시 2 <span class="material-symbols-outlined">delete</span>
+            예시 2
+            <span class="material-symbols-outlined">delete</span>
           </li>
         </ul>
-        <div class="form flex">
-          <input />
-          <button>+</button>
-        </div>
+        <form class="flex">
+          <input class="rightInput" />
+          <button class="rightButton">+</button>
+        </form>
       </section>
     </main>
     <footer></footer>
