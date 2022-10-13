@@ -9,6 +9,8 @@ const left_input = $('.leftInput');
 const right_input = $('.rightInput');
 const left_list = $('.leftList');
 const right_list = $('.rightList');
+const garbage = $('.material-symbols-outlined');
+const lists = $$('li');
 
 //이벤트 위임을 이용해 버튼을 이용한 화면 전환 구현
 //애니메이션 효과 적용
@@ -40,6 +42,7 @@ nav.addEventListener("click", (e) => {
 })
 
 //Left + 버튼 클릭 시 Add 함수 호출하는 이벤트 
+
 left_form_button.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -58,6 +61,7 @@ function onAddLeft(left_input) {
     currentDeleteBtn.innerHTML = "delete";
     currentDeleteBtn.classList.add('material-symbols-outlined');
     currentLi.appendChild(currentDeleteBtn);
+
     currentLi.classList.add('grid');
 
     return currentLi;
@@ -82,8 +86,38 @@ function onAddRight(right_input) {
     currentDeleteBtn.innerHTML = "delete";
     currentDeleteBtn.classList.add('material-symbols-outlined');
     currentLi.appendChild(currentDeleteBtn);
+
     currentLi.classList.add('grid');
 
     return currentLi;
 }
 
+//Left 에서 휴지통 아이콘 클릭 시 삭제하는 기능 구현 
+
+left_list.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const target = e.target;
+        switch (target.nodeName) {
+            case 'SPAN':
+            const n = e.target.parentNode;
+            left_list.removeChild(n);
+            break;
+        }
+        
+    }
+)
+
+//Right 에서 휴지통 아이콘 클릭 시 삭제하는 기능 구현
+
+right_list.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const target = e.target;
+    switch (target.nodeName) {
+        case 'SPAN':
+        const n = e.target.parentNode;
+        right_list.removeChild(n);
+        break;
+    }
+    
+}
+)
