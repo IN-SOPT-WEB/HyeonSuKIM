@@ -148,3 +148,49 @@ article:hover {
   }
 
 }
+
+/*Dropdown-----------------------------------*/
+.dropdown{
+  background-color: rgb(255, 254, 254);
+  max-width: 85px;
+  position: relative;
+
+
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 150px;
+  top: 30px;
+  right: 0px;
+}
+
+.dropdown h3 {
+  background-color: rgb(255, 255, 255);
+  margin:0;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  border-bottom: rgb(126, 126, 126) solid 1px;
+  font-weight: 400;
+}
+
+.dropdown h3:hover {
+  color: rgb(87, 190, 156);
+}
+
+.dropdown span{
+  background-color: rgba(255, 255, 255, 0.295);
+ 
+}
+
+.toggle_content {
+  font-weight: 400;
+}
+
+
+.show {
+  display: block;
+}

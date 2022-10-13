@@ -49,7 +49,9 @@
         <div class="circleBox">
           <img class="profile" src="./src/me.png" />
         </div>
-        <span class="material-symbols-outlined"> expand_more </span>
+        <span class="material-symbols-outlined">
+          expand_more
+        </span>
       </div>
     </header>
     <nav class="flex">
@@ -58,8 +60,16 @@
         <h4>트렌딩</h4>
         <span class="material-symbols-outlined"> browse_gallery </span>
         <h4>최신</h4>
-        <h4>이번 주</h4>
-        <span class="material-symbols-outlined"> expand_more </span>
+        <div class="dropdown flex">
+          <h4 class="toggle_content">이번 주</h4>
+          <span class="material-symbols-outlined dropdownToggle"> expand_more </span>
+          <div class="dropdown_content">
+            <h3>오늘</h3>
+            <h3>이번 주</h3>
+            <h3>이번 달</h3>
+            <h3>올해</h3>
+          </div>
+        </div>
       </div>
       <span class="material-symbols-outlined"> more_vert </span>
     </nav>
