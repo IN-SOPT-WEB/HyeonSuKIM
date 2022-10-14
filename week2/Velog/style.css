@@ -194,3 +194,10 @@ article:hover {
 .show {
   display: block;
 }
+
+/*Tag---------------------------------------------*/
+
+.writeBtn {
+  text-decoration: none;
+  color: black;
+}
