@@ -49,10 +49,8 @@ const Content = () => {
         if (answer[i] === response){
             setScore(score+1);
             setI(i + 1);
-            if (score === 5){
+            if (score === 4){
                 setEnd(1);
-                console.log(end);
-                setScore(0);
             }
         }    
     }, [response]);
@@ -64,6 +62,7 @@ const Content = () => {
     const reset = () => {
         setI(0);
         setScore(0);
+        setEnd(0);
     }
 
 
