@@ -28,6 +28,15 @@ const Choice = (props) => {
     );
 }
 
+const Reset = (props) => {
+    const {reset} = props;
+    return (
+        <div>
+            <button onClick={() => {reset()}}>다시하기</button>
+        </div>
+    )
+}
+
 const Content = () => {
     const [score, setScore] = useState(0);
     const [end, setEnd] = useState(0);
@@ -35,15 +44,15 @@ const Content = () => {
     const [i, setI] = useState(0);
     const answer = [1, 3, 4, 0, 2];
 
-    if (score === 5){
-        setEnd(1);
-    }
+    
     useEffect (() => {
         if (answer[i] === response){
             setScore(score+1);
             setI(i + 1);
             if (score === 5){
                 setEnd(1);
+                console.log(end);
+                setScore(0);
             }
         }    
     }, [response]);
@@ -52,12 +61,18 @@ const Content = () => {
         setResponse(index);
     };
 
+    const reset = () => {
+        setI(0);
+        setScore(0);
+    }
+
 
 
     return (
         <div>
             <Score score = {score} end = {end}></Score>
             {end === 0 ? (<Choice score = {score} end = {end} i = {i} changeResponse = {changeResponse}></Choice>) : (<h4>끝</h4>)}
+            <Reset reset = {reset}></Reset>
         </div>
     );
 };
