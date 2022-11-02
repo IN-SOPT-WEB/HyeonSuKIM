@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 const Score = (props) => {
-    const {score, end} = props;
+    const {score} = props;
     return (
         <div>
             <h4>{score}점</h4>
@@ -13,7 +13,7 @@ const Score = (props) => {
 }
 
 const Choice = (props) => {
-    const {score, end, i, changeResponse} = props;
+    const {i, changeResponse} = props;
     let base = 5*i;
     const names = ["김현수", "김남준", "김서현", "김형겸", "나림", "류성경", "문서연", "박현지", "서지수", "송우영", "송하윤", "한예원", "유준상", "윤지영", "이서영", "장명지", "정재욱", "정현욱", "최유진", "최은형", "홍명헌", "서혜은", "홍서희", "이주함", "웹사랑해"];
     return (
