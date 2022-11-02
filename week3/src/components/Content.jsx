@@ -1,14 +1,14 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
+import styled from 'styled-components';
 
 //Content 상단에서 현재 점수를 보여주는 컴포넌트 
 const Score = (props) => {
     const {score} = props;
     return (
         <div>
-            <h4>{score}점</h4>
+            <Scr>{score}점</Scr>
         </div>
     );
 }
@@ -21,14 +21,15 @@ const Choice = (props) => {
     let base = 5*i;
     const names = ["김현수", "김남준", "김서현", "김형겸", "나림", "류성경", "문서연", "박현지", "서지수", "송우영", "송하윤", "한예원", "유준상", "윤지영", "이서영", "장명지", "정재욱", "정현욱", "최유진", "최은형", "홍명헌", "서혜은", "홍서희", "이주함", "웹사랑해"];
     return (
-        <div>
-            <img src= {`${process.env.PUBLIC_URL}/photos/${i}.png`} alt = "웹 파트원들 사진"/>
-            <button onClick={() => {changeResponse(0)}}>{names[base]}</button>
-            <button onClick={() => {changeResponse(1)}}>{names[base + 1]}</button>
-            <button onClick={() => {changeResponse(2)}}>{names[base + 2]}</button>
-            <button onClick={() => {changeResponse(3)}}>{names[base + 3]}</button>
-            <button onClick={() => {changeResponse(4)}}>{names[base + 4]}</button> {/* map 을 써서 줄일 수 있지 않을까 생각중입니다.. */}
-        </div>
+        <Cnt>
+            <Img src= {`${process.env.PUBLIC_URL}/photos/${i}.png`} alt = "웹 파트원들 사진"/>
+            <Subtitle>누구얒!</Subtitle>
+            <Btn onClick={() => {changeResponse(0)}}>{names[base]}</Btn>
+            <Btn onClick={() => {changeResponse(1)}}>{names[base + 1]}</Btn>
+            <Btn onClick={() => {changeResponse(2)}}>{names[base + 2]}</Btn>
+            <Btn onClick={() => {changeResponse(3)}}>{names[base + 3]}</Btn>
+            <Btn onClick={() => {changeResponse(4)}}>{names[base + 4]}</Btn> {/* map 을 써서 줄일 수 있지 않을까 생각중입니다.. */}
+        </Cnt>
     );
 }
 
@@ -36,9 +37,9 @@ const Choice = (props) => {
 const Reset = (props) => {
     const {reset} = props;
     return (
-        <div>
-            <button onClick={() => {reset()}}>다시하기</button>
-        </div>
+        <Cnt>
+            <ReBtn onClick={() => {reset()}}>다시하기</ReBtn>
+        </Cnt>
     )
 }
 
@@ -81,10 +82,58 @@ const Content = () => {
     return (
         <div>
             <Score score = {score} end = {end}></Score>
-            {end === 0 ? (<Choice score = {score} end = {end} i = {i} changeResponse = {changeResponse}></Choice>) : (<h4>끝</h4>)}
+            {end === 0 ? (<Choice score = {score} end = {end} i = {i} changeResponse = {changeResponse}></Choice>) : (<End>끝</End>)}
             <Reset reset = {reset}></Reset>
         </div>
     );
 };
 
+const Scr = styled.h4`
+  text-align: center;
+  background-color: #2b334b;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  font-weight: 400;
+`
+
+const Cnt = styled.div`
+    padding: 20px 0px;
+    text-align: center;
+    background-color: #474541;
+`
+
+const Img = styled.img`
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+`
+
+const Subtitle = styled.h4`
+    font-weight: 400;
+    color: white;
+`
+
+const Btn = styled.button`
+    background-color: #a09f9f;
+    color: white;
+    margin: 0px 2px;
+    padding: 2px 7px;
+`
+const ReBtn = styled.button`
+    width: 100%;
+    padding: 10px;
+    background-color: #8a8a8a;
+    color: white;
+    font-size: larger;
+`
+const End = styled.h4`
+    background-color: #474541;
+    color: white;
+    margin: 0px;
+    text-align: center;
+    height: 331px;
+    line-height: 331px;
+`
 export default Content;
