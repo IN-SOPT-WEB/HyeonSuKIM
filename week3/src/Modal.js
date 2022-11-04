@@ -11,8 +11,11 @@ const Modal = (props) => {
   return (
       <Background>
         <Content>
-            {correct ? <p>참</p>  : <p>거짓</p>}
-            <button onClick = {onClose}>닫기</button>
+            {correct ? 
+            <Box><h4>정답!</h4><p>함가브자이마리야</p><Btn onClick = {onClose}>닫기</Btn></Box>  : 
+            <Box><h4>땡!</h4><p>뚁땽해</p><Btn onClick = {onClose}>닫기</Btn></Box>
+            }
+            
          </ Content>
       </Background>
   );
@@ -30,15 +33,30 @@ const Background = styled.div`
   justify-content: center;
   position: fixed;
   left: 0;
-  top: 0;
   text-align: center;
 `;
 
 const Content = styled.div`
-  height: 300px;
-  width: 950px;
+  height: 120px;
+  width: 240px;
   margin-top: 70px;
-  position: relative;
+  position: fixed;
+  top: 100px;
   overflow: scroll;
-  background: #ffffff;
+  background: #ffaeae;
+
 `;
+
+const Box = styled.div`
+    color: white;
+    text-align: left;
+    padding-top: 5px;
+    padding-left: 10px;
+    line-height: 10px;
+    
+`
+
+const Btn = styled.button`
+    background-color: #494949;
+    color:white;
+`
