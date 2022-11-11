@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 
-function Modal({ setModalOpen, array, deleteArray, userId}) {
+function Modal({ setModalOpen, array, deleteArray, navigate}) {
     
     // 모달 끄기 
     const closeModal = () => {
@@ -18,8 +18,8 @@ function Modal({ setModalOpen, array, deleteArray, userId}) {
         <div>
             {array.map((array, index) => (
                <div key = {index}>
-                <button onClick={ () => {closeModal(); deleteArray(array)}}>X</button>
-                <p>{array}</p>
+                <button onClick={ () => {closeModal(); deleteArray(array);}}>X</button>
+                <p onClick = { () => { navigate(`/search/${array}`); } }>{array}</p>
                </div> 
             ))}
             
@@ -67,7 +67,7 @@ export default function Header() {
     <div>
       <h1>Github Profile Finder</h1>
         <input onKeyPress={entered} onClick={clicked} />
-        {showArray && <Modal setModalOpen={setModalOpen} array = {array} deleteArray = {deleteArray} userId = {userId}/>}
+        {showArray && <Modal setModalOpen={setModalOpen} array = {array} deleteArray = {deleteArray} navigate = {navigate}/>}
     </div>
   )
 }
