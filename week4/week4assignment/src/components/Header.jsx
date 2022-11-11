@@ -1,25 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components'; 
 
-function Modal({ setModalOpen, array, deleteArray, navigate}) {
+function Modal({ setModalOpen, array, deleteArray, navigate, showArray, userId = {userId}}) {
     
-    // 모달 끄기 
-    const closeModal = () => {
-        setModalOpen(false);
-    };
+    const modalRef = useRef();
+    useEffect(() => {
+        document.addEventListener("mousedown", clickOutside);
+        return () => {
+            document.removeEventListener("mousedown", clickOutside);
+          };
+        });
 
-
-
+        const clickOutside = (e) => {
+            // 모달이 열려 있고 모달의 바깥쪽을 눌렀을 때 창 닫기
+            if (modalRef && !modalRef.current.contains(e.target)) {
+              setModalOpen(false);
+            }
+            else {
+                setModalOpen(true); 
+            }
+          };
+      
 
     return (
         <>
-        <div>
+        <div ref={modalRef}>
             {array.map((array, index) => (
-               <div key = {index}>
-                <button onClick={ () => {closeModal(); deleteArray(array);}}>X</button>
-                <p onClick = { () => { navigate(`/search/${array}`); } }>{array}</p>
-               </div> 
+               <SearchModal  key = {index} >
+                <ModalText onClick = { () => { navigate(`/search/${array}`); setModalOpen(false); } }>{array}</ModalText>
+                <ModalBtn onClick={ () => {setModalOpen(true); deleteArray(array);}}>X</ModalBtn>
+               </SearchModal> 
             ))}
             
         </div>
@@ -61,13 +73,96 @@ export default function Header() {
         setArray(newArray);
     };
     
+   
 
     return (
-    <div>
-      <h1>Github Profile Finder</h1>
-        <input onKeyPress={entered} onClick={clicked} />
-        {showArray && <Modal setModalOpen={setModalOpen} array = {array} deleteArray = {deleteArray} navigate = {navigate}/>}
+    <BackGround>
+    <Wrapper>
+        <Head>
+      <Title>Github Profile Finder</Title>
+        <Input onKeyPress={entered} onClick={clicked} />
+        </Head>
+
+        <Body>
+    
+        <SearchHistory>
+        {showArray && <Modal setModalOpen={setModalOpen} array = {array} deleteArray = {deleteArray} navigate = {navigate} showArray = {showArray} userId = {userId}/>}
+        </SearchHistory>
+        <Padding></Padding>
+        <Blank></Blank>
         <Outlet />
-    </div>
+        </Body>
+    </Wrapper>
+    </BackGround>
   )
 }
+
+const Wrapper = styled.div`
+    text-align: center;
+    width: 600px;
+`;
+
+const BackGround = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    height: 100vh;
+`
+const Title = styled.h1`
+    margin-top: 30px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #6ea2cf;
+`
+const Input = styled.input`
+    background-color: #1a3349;
+    color: #f2f7ff; 
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+`
+
+const Head = styled.div`
+    background-color: #6ea2cf;
+`
+const Body = styled.div`
+    background-color: #6ea2cf;
+`
+const SearchHistory = styled.div`
+    background-color: #6ea2cf;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+
+`
+const SearchModal = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 212px;
+    border : 1px solid;
+`
+
+const Blank = styled.div`
+    background-color: white;
+    height: 20px;
+`
+const Padding = styled.div`
+        background-color: #6ea2cf;
+        height: 15px;
+
+`
+const ModalBtn = styled.button`
+    border:none;
+    background-color: #1a3349;
+    color: aliceblue;
+    padding: 0 10px;
+    height: 28px;
+    margin-right: 5px;
+
+`
+const ModalText = styled.p`
+    margin-left: 10px;
+    
+`

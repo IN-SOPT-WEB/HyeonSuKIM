@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import {useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import styled from 'styled-components';
 
 export default function Content() {
 
@@ -28,16 +29,47 @@ export default function Content() {
 
   return (
     <div>
+        <BtnDiv><CloseBtn onClick = {() => {navigate("/search")}}>X</CloseBtn></BtnDiv>
         <img src={githubProfile.avatar_url} alt="유저 사진" />
-        <div>{githubProfile.login}</div>
-        <div>{githubProfile.name}</div>
-        <button onClick={() => window.open(githubProfile.html_url)}>Visit{githubProfile.name}</button>
-        <div>Followers<div>{githubProfile.followers}</div></div>
-        <div>Following<div>{githubProfile.following}</div></div>
-        <div>Repos<div>{githubProfile.public_repos}</div></div>
-
+        <h2>{githubProfile.login}</h2>
+        <h2>{githubProfile.name}</h2>
+        <VistBtn onClick={() => window.open(githubProfile.html_url)}>Visit {githubProfile.name}</VistBtn>
+        <Infos>
+        <Info><h4>Followers<Num>{githubProfile.followers}</Num></h4></Info>
+        <Info><h4>Following<Num>{githubProfile.following}</Num></h4></Info>
+        <Info><h4>Repos<Num>{githubProfile.public_repos}</Num></h4></Info>
+        </Infos>
 
     </div>
   )
 }
 
+const BtnDiv= styled.div`
+    text-align: right;
+`
+const CloseBtn = styled.button`
+    background-color: #d7edff;
+    border: none;
+    font-size: 20px;
+    margin-right: 5px;
+    margin-top: 6px;
+`
+
+const Infos = styled.div`
+    display: flex;
+    justify-content: space-around;
+`
+
+const Info = styled.div`
+   width: 100px;
+`
+const Num = styled.div`
+    font-size: 30px;
+`
+const VistBtn = styled.button`
+    width: 200px;
+    height: 30px;
+    font-size: larger;
+    border-radius: 30px;
+    background-color: #c8e6ff;
+`
