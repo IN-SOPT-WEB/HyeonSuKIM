@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios';
-
+import { Outlet } from 'react-router-dom';
 
 function Modal({ setModalOpen, array, deleteArray, navigate}) {
     
@@ -68,6 +67,7 @@ export default function Header() {
       <h1>Github Profile Finder</h1>
         <input onKeyPress={entered} onClick={clicked} />
         {showArray && <Modal setModalOpen={setModalOpen} array = {array} deleteArray = {deleteArray} navigate = {navigate}/>}
+        <Outlet />
     </div>
   )
 }

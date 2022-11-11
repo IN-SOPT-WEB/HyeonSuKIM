@@ -8,7 +8,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/search" element={<Header/>}>
-            <Route path=":userId" element={<Content />}/>
+            <Route path=":userName" element={<Content />}/>
         </Route>
       </Routes>
     </BrowserRouter>
