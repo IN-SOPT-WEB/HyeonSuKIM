@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 
-function Modal({ setModalOpen, array}) {
+function Modal({ setModalOpen, array, deleteArray, userId}) {
     
     // 모달 끄기 
     const closeModal = () => {
         setModalOpen(false);
-        //배열에서 해당 이름(arr)을 가진 요소 제거 
     };
+
 
 
 
@@ -18,7 +18,7 @@ function Modal({ setModalOpen, array}) {
         <div>
             {array.map((array, index) => (
                <div key = {index}>
-                <button onClick={closeModal}>X</button>
+                <button onClick={ () => {closeModal(); deleteArray(array)}}>X</button>
                 <p>{array}</p>
                </div> 
             ))}
@@ -57,14 +57,17 @@ export default function Header() {
         setShowArray(boolean); 
     }
 
-    
+    const deleteArray = (userId) => {
+        const newArray = array.filter((item) => item !== userId);
+        setArray(newArray);
+    };
     
 
     return (
     <div>
       <h1>Github Profile Finder</h1>
         <input onKeyPress={entered} onClick={clicked} />
-        {showArray && <Modal setModalOpen={setModalOpen} array = {array}/>}
+        {showArray && <Modal setModalOpen={setModalOpen} array = {array} deleteArray = {deleteArray} userId = {userId}/>}
     </div>
   )
 }
