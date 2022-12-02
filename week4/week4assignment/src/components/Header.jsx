@@ -73,6 +73,7 @@ export default function Header() {
         setArray(newArray);
     };
     
+    
    
 
     return (
@@ -80,7 +81,7 @@ export default function Header() {
     <Wrapper>
         <Head>
       <Title>Github Profile Finder</Title>
-        <Input onKeyPress={entered} onClick={clicked} />
+        <Input placeholder='Github Username...' onKeyPress={entered} onClick={clicked} />
         </Head>
 
         <Body>
