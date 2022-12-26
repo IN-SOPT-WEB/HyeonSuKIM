@@ -27,8 +27,7 @@ function Modal({
   const clickOutside = (e: MouseEvent) => {
     // 모달이 열려 있고 모달의 바깥쪽을 눌렀을 때 창 닫기
     const {target} = e;
-    if (!(target instanceof Node)) return;
-    if (modalRef.current && !modalRef.current.contains(target)) {
+    if (target instanceof Node && modalRef.current && !modalRef.current.contains(target)) {
       setModalOpen(false);
     } else {
       setModalOpen(true);
