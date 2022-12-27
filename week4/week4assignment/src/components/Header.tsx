@@ -4,17 +4,17 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 type ModalProps = {
-  setModalOpen: (boolean: boolean) => void;
-  array: string[];
-  deleteArray: (userId: string) => void;
+  setuserNameArrayVisibility: (boolean: boolean) => void;
+  userNameArray: string[];
+  deleteUserNameArray: (userName: string) => void;
   navigate: (string: string) => void;
 };
 
 function Modal({
-  setModalOpen, //function boolean -> void
-  array, // string array
-  deleteArray, // function string -> void
-  navigate, // function void -> void..?
+  setuserNameArrayVisibility,
+  userNameArray,
+  deleteUserNameArray,
+  navigate,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -25,32 +25,35 @@ function Modal({
   });
 
   const clickOutside = (e: MouseEvent) => {
-    // 모달이 열려 있고 모달의 바깥쪽을 눌렀을 때 창 닫기
-    const {target} = e;
-    if (target instanceof Node && modalRef.current && !modalRef.current.contains(target)) {
-      setModalOpen(false);
+    const { target } = e;
+    if (
+      target instanceof Node &&
+      modalRef.current &&
+      !modalRef.current.contains(target)
+    ) {
+      setuserNameArrayVisibility(false);
     } else {
-      setModalOpen(true);
+      setuserNameArrayVisibility(true);
     }
   };
 
   return (
     <>
       <div ref={modalRef}>
-        {array.map((array, index) => (
+        {userNameArray.map((userName, index) => (
           <SearchModal key={index}>
             <ModalText
               onClick={() => {
-                navigate(`/search/${array}`);
-                setModalOpen(false);
+                navigate(`/search/${userName}`);
+                setuserNameArrayVisibility(false);
               }}
             >
-              {array}
+              {userName}
             </ModalText>
             <ModalBtn
               onClick={() => {
-                setModalOpen(true);
-                deleteArray(array);
+                setuserNameArrayVisibility(true);
+                deleteUserNameArray(userName);
               }}
             >
               X
@@ -63,38 +66,28 @@ function Modal({
 }
 
 export default function Header() {
-  const [array, setArray] = useState<string[]>([]);
-  const [userId, setUserId] = useState("");
-  const [showArray, setShowArray] = useState(false);
+  const [userNameArray, setUserNameArray] = useState<string[]>([]);
+  const [userName, setUserName] = useState("");
+  const [userNameArrayVisibility, setuserNameArrayVisibility] = useState(false);
 
   const navigate = useNavigate();
 
-  const settingArray = (array: string[], neww: string) => {
-    return [...array, neww];
+  const clicked = () => {
+    setuserNameArrayVisibility(true);
   };
 
-  // input 에서 엔터가 눌렷을 때 발생하는 이벤트
   const entered = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       navigate(`/search/${e.currentTarget.value}`);
-      setUserId(e.currentTarget.value);
-      setArray(settingArray(array, e.currentTarget.value));
-      setShowArray(false);
+      setUserName(e.currentTarget.value);
+      setUserNameArray([...userNameArray, e.currentTarget.value]);
+      setuserNameArrayVisibility(false);
     }
   };
 
-  const clicked = () => {
-    console.log(array);
-    setShowArray(true);
-  };
-
-  function setModalOpen(boolean: boolean) {
-    setShowArray(boolean);
-  }
-
-  const deleteArray = (userId: string) => {
-    const newArray = array.filter((item) => item !== userId);
-    setArray(newArray);
+  const deleteUserNameArray = (userName: string) => {
+    const deletedUserNameArray = userNameArray.filter((item) => item !== userName);
+    setUserNameArray(deletedUserNameArray);
   };
 
   return (
@@ -111,19 +104,17 @@ export default function Header() {
 
         <Body>
           <SearchHistory>
-            {showArray && (
+            {userNameArrayVisibility && (
               <Modal
-                setModalOpen={setModalOpen}
-                array={array}
-                deleteArray={deleteArray}
+                setuserNameArrayVisibility={setuserNameArrayVisibility}
+                userNameArray={userNameArray}
+                deleteUserNameArray={deleteUserNameArray}
                 navigate={navigate}
-                //showArray={showArray}
-                //userId={userId}
               />
             )}
           </SearchHistory>
-          <Padding></Padding>
-          <Blank></Blank>
+          <Padding />
+          <Blank />
           <Outlet />
         </Body>
       </Wrapper>

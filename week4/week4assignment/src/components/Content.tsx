@@ -1,24 +1,34 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { stringify } from "querystring";
 
 export default function Content() {
   const { userName } = useParams();
   const navigate = useNavigate();
-  const [githubProfile, setgithubProfile] = useState({login: '', name: '', avatar_url: '', html_url: '', followers: '', following: '', public_repos: ''});
+  const initialState = {
+    login: "",
+    name: "",
+    avatar_url: "",
+    html_url: "",
+    followers: "",
+    following: "",
+    public_repos: "",
+  };
+  const [githubProfile, setgithubProfile] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getGithubProfile = async () => {
     try {
+      setIsLoading(true);
       const { data } = await axios.get(
         `https://api.github.com/users/${userName}`
       );
+      setIsLoading(false);
       setgithubProfile(data);
-      console.log(data);
+      //console.log(data);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -30,38 +40,44 @@ export default function Content() {
 
   return (
     <div>
-      <BtnDiv>
-        <CloseBtn
-          onClick={() => {
-            navigate("/search");
-          }}
-        >
-          X
-        </CloseBtn>
-      </BtnDiv>
-      <img src={githubProfile.avatar_url} alt="유저 사진" />
-      <h2>{githubProfile.login}</h2>
-      <h2>{githubProfile.name}</h2>
-      <VistBtn onClick={() => window.open(githubProfile.html_url)}>
-        Visit {githubProfile.name}
-      </VistBtn>
-      <Infos>
-        <Info>
-          <h4>
-            Followers<Num>{githubProfile.followers}</Num>
-          </h4>
-        </Info>
-        <Info>
-          <h4>
-            Following<Num>{githubProfile.following}</Num>
-          </h4>
-        </Info>
-        <Info>
-          <h4>
-            Repos<Num>{githubProfile.public_repos}</Num>
-          </h4>
-        </Info>
-      </Infos>
+      {!isLoading ? (
+        <div>
+          <BtnDiv>
+            <CloseBtn
+              onClick={() => {
+                navigate("/search");
+              }}
+            >
+              X
+            </CloseBtn>
+          </BtnDiv>
+          <img src={githubProfile.avatar_url} alt="유저 사진" />
+          <h2>{githubProfile.login}</h2>
+          <h2>{githubProfile.name}</h2>
+          <VistBtn onClick={() => window.open(githubProfile.html_url)}>
+            Visit {githubProfile.name}
+          </VistBtn>
+          <Infos>
+            <Info>
+              <h4>
+                Followers<Num>{githubProfile.followers}</Num>
+              </h4>
+            </Info>
+            <Info>
+              <h4>
+                Following<Num>{githubProfile.following}</Num>
+              </h4>
+            </Info>
+            <Info>
+              <h4>
+                Repos<Num>{githubProfile.public_repos}</Num>
+              </h4>
+            </Info>
+          </Infos>
+        </div>
+      ) : (
+        <div>로딩중</div>
+      )}
     </div>
   );
 }
